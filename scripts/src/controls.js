@@ -49,7 +49,7 @@ define(
 
 		function updateValue( key, value )
 		{
-			values[key] = value;
+			values[key] = parseInt( value, 10 );
 
 			if ( is_initialized )
 			{
