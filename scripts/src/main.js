@@ -15,6 +15,7 @@ requirejs.config(
 require(
 	[
 		'src/process',
+		'src/grid-canvas',
 		'src/image',
 		'src/dragdrop',
 		'src/controls',
@@ -26,6 +27,7 @@ require(
 	],
 	function(
 		process,
+		grid_canvas,
 		image,
 		dragdrop,
 		controls,
@@ -46,11 +48,13 @@ require(
 					'set-new-src'     : new Signal(),
 					'control-updated' : new Signal(),
 					'export-png'      : new Signal(),
-					'saved'           : new Signal()
+					'saved'           : new Signal(),
+					'points-updated'  : new Signal()
 				}
 			};
 
 			process.init( shared );
+			grid_canvas.init( shared );
 			dragdrop.init( shared );
 			controls.init( shared );
 			png.init( shared );
