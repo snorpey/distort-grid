@@ -15,31 +15,18 @@
 		</article>
 		<div class="content" id="controls">
 			<div class="control-wrapper">
-				<label class="control-label" for="amount">distortion amount</label>
-				<input class="control-input" type="range" id="amount" min="0" max="100" value="50" />
-			</div>
-			<div class="control-wrapper">
-				<label class="control-label" for="horizontal">horizontal distortion</label>
-				<input class="control-input" type="range" id="horizontal" min="-1" max="1" value="0" step="0.1" />
-			</div>
-			<div class="control-wrapper">
-				<label class="control-label" for="vertical">vertical distortion</label>
-				<input class="control-input" type="range" id="vertical" min="-1" max="1" value="1" step="0.1" />
-			</div>
-			<div class="control-wrapper">
 				<label class="control-label" for="grid_size">grid size</label>
 				<input class="control-input" type="range" id="grid_size" min="15" max="100" value="40" />
-			</div>
-			<div class="control-wrapper">
-				<label class="control-label" for="detail">accuracy</label>
-				<input class="control-input" type="range" id="detail" min="5" max="100" value="50" />
 			</div>
 		</div>
 		<div class="export-wrapper">
 			<button id="save-button" class="button">export image</button>
 			<a id="png-button" download="glitched-image.png" target="_blank" class="download-link">download bitmap file<span> (.png)</span></a>
 		</div>
-		<canvas id="canvas"></canvas>
+		<div class="canvas-wrapper">
+			<canvas id="image-canvas"></canvas>
+			<canvas id="grid-canvas"></canvas>
+		</div>
 		<script src="scripts/lib/require-2.1.4.js" data-main="scripts/src/main"></script>
 	</body>
 </html>
