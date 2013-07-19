@@ -146,6 +146,7 @@ canvas
 #grid-canvas:hover
 {
 	opacity: 1;
+	cursor: pointer;
 }
 
 #canvas-wrapper #image-canvas
