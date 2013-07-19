@@ -53,19 +53,19 @@ define(
 		{
 			is_pressed = true;
 
-			updateMousePosition( event.offsetX, event.offsetY );
+			updateMousePosition( event );
 		}
 
 		function mouseReleased( event )
 		{
 			is_pressed = false;
 
-			updateMousePosition( event.offsetX, event.offsetY );
+			updateMousePosition( event );
 		}
 
 		function mouseMoved( event )
 		{
-			updateMousePosition( event.offsetX, event.offsetY );
+			updateMousePosition( event );
 		}
 
 		function mouseHovered( event )
@@ -80,12 +80,24 @@ define(
 			update();
 		}
 
-		function updateMousePosition( x, y )
+		function updateMousePosition( event )
 		{
 			last_pos = current_pos;
 
-			current_pos.x = x;
-			current_pos.y = y;
+			if (
+				typeof event.offsetX !== 'undefined' &&
+				typeof event.offsetY !== 'undefined'
+			)
+			{
+				current_pos.x = event.offsetX;
+				current_pos.y = event.offsetY;
+			}
+
+			else
+			{
+				current_pos.x = event.layerX;
+				current_pos.y = event.layerY;
+			}
 
 			update();
 		}
@@ -94,7 +106,10 @@ define(
 		{
 			closest_point = getClosestPoint( points, current_pos );
 
-			if ( is_over && is_pressed )
+			if (
+				is_over &&
+				is_pressed
+			)
 			{
 				closest_point.x_end = current_pos.x;
 				closest_point.y_end = current_pos.y;
