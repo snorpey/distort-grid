@@ -123,6 +123,40 @@ a:hover
 		margin-left: 4px;
 	}
 
+.canvas-wrapper
+{
+	position: relative;
+	clear: both;
+	margin-top: 160px;
+}
+
+canvas
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#grid-canvas
+{
+	z-index: 2;
+	opacity: 0
+}
+
+#grid-canvas:hover
+{
+	opacity: 1;
+}
+
+#canvas-wrapper #image-canvas
+{
+	opacity: 0.3;
+}
+
+#canvas-wrapper #grid-canvas
+{
+	opacity: 1;
+}
 
 .missing-feature
 {
