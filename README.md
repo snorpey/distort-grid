@@ -1,7 +1,7 @@
 image distortion experiment
 ===
 
-this is an experiment for the web browser. it lets you distort an image by moving intersections in a grid-
+this is an experiment for the web browser. it lets you distort an image by moving intersections in a grid.
 
 [![distortion experiment screen shot](https://dl.dropboxusercontent.com/u/1098704/Screenshots/github-distort-grid.png)](http://snorpey.github.io/distort-grid/)
 
