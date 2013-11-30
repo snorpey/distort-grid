@@ -1,6 +1,6 @@
 /*global define*/
 define(
-	[ 'aux/canvas', 'aux/imagedata-contrast' ],
+	[ 'util/canvas', 'util/imagedata-contrast' ],
 	function( canvas_helper, getImageDataContrast )
 	{
 		var canvas = document.createElement( 'canvas' );
