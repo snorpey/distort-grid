@@ -1,14 +1,10 @@
-/*global require, requirejs, define, Modernizr, _basepath_ */
+/*global require, requirejs, define */
 // http://requirejs.org/docs/api.html#config 
-var path = typeof _basepath_ === 'string' ? _basepath_ + '/' : '';
 requirejs.config(
 	{
-		baseUrl: path + 'scripts/',
+		baseUrl: 'scripts/',
 		waitSeconds: 5,
 		urlArgs: 'bust=' +  ( new Date() ).getTime(),
-		shim: {
-			'lib/delaunay': { exports: 'triangulate' }
-		}
 	}
 );
 
@@ -17,22 +13,27 @@ require(
 		'src/process',
 		'src/grid-canvas',
 		'src/image',
+		'src/file',
 		'src/dragdrop',
 		'src/controls',
-		'src/export-png',
-		'src/save-button',
-		'aux/feature-test',
-		'lib/signals-1.0.0',
-		'lib/html5slider'
+		'src/export-button',
+		'src/import-button',
+		'src/upload-imgur',
+		'src/intro',
+		'util/feature-test',
+		'lib/signals-1.0.0'
 	],
 	function(
 		process,
 		grid_canvas,
 		image,
+		file,
 		dragdrop,
 		controls,
-		png,
-		save_button,
+		export_button,
+		import_button,
+		imgur,
+		intro,
 		testFeatures,
 		Signal
 	)
@@ -44,22 +45,28 @@ require(
 			var shared = {
 				feature: supported_features,
 				signals: {
-					'image-loaded'    : new Signal(),
-					'set-new-src'     : new Signal(),
-					'control-updated' : new Signal(),
-					'export-png'      : new Signal(),
-					'saved'           : new Signal(),
-					'points-updated'  : new Signal()
+					'points-updated'           : new Signal(),
+					'load-file'                : new Signal(),
+					'image-loaded'             : new Signal(),
+					'set-new-src'              : new Signal(),
+					'control-set'              : new Signal(),
+					'control-updated'          : new Signal(),
+					'close-intro'              : new Signal(),
+					'image-data-url-requested' : new Signal()
 				}
 			};
 
 			process.init( shared );
 			grid_canvas.init( shared );
+
 			dragdrop.init( shared );
 			controls.init( shared );
-			png.init( shared );
-			save_button.init( shared );
+			export_button.init( shared );
+			import_button.init( shared );
 			image.init( shared );
+			file.init( shared );
+			imgur.init( shared );
+			intro.init( shared );
 		}
 
 		function showError( required_features )

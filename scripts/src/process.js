@@ -1,6 +1,6 @@
 /*global define, requestAnimationFrame*/
 define(
-	[ 'aux/distort', 'aux/canvas', 'lib/raf' ],
+	[ 'util/distort', 'util/canvas', 'lib/raf' ],
 	function( distort, canvas_helper )
 	{
 		var canvas = document.getElementById( 'image-canvas' );
@@ -20,7 +20,7 @@ define(
 			signals['image-loaded'].add( generate );
 			signals['points-updated'].add( pointsUpdated );
 			signals['control-updated'].add( controlsUpdated );
-			signals['saved'].add( exportData );
+			signals['image-data-url-requested'].add( exportData );
 		}
 
 		function controlsUpdated( new_values )
@@ -77,7 +77,7 @@ define(
 
 			if ( image && points && values )
 			{
-				distort( image, points, values.grid_size, draw );
+				distort( image, points, values.gridsize, draw );
 			}
 		}
 
@@ -91,9 +91,12 @@ define(
 			image_data = null;
 		}
 
-		function exportData()
+		function exportData( callback )
 		{
-			signals['export-png'].dispatch( canvas.toDataURL( 'image/png' ) );
+			if ( typeof callback === 'function' )
+			{
+				callback( canvas.toDataURL( 'image/png' ) );
+			}
 		}
 
 		function getAdjustedValues( new_values )

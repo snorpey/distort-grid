@@ -1,6 +1,6 @@
 /*global define*/
 define(
-	[ 'aux/canvas', 'aux/collection' ],
+	[ 'util/canvas', 'util/collection' ],
 	function( canvas_helper, collection_helper )
 	{
 		var signals;
@@ -12,7 +12,7 @@ define(
 		var is_over = false;
 		var current_pos = { x: 0, y: 0 };
 		var last_pos = current_pos;
-		var grid_size = 50;
+		var gridsize = 50;
 
 		function init( shared )
 		{
@@ -41,9 +41,9 @@ define(
 
 		function controlsUpdated( new_values )
 		{
-			if ( new_values.grid_size !== grid_size )
+			if ( new_values.gridsize !== gridsize )
 			{
-				grid_size = parseInt( new_values.grid_size, 10 );
+				gridsize = parseInt( new_values.gridsize, 10 );
 				resetPoints();
 				update();
 			}
@@ -193,11 +193,11 @@ define(
 			var width = element.width;
 			var height = element.height;
 
-			for ( x = 0; x < width; x += grid_size )
+			for ( x = 0; x < width; x += gridsize )
 			{
 				row = 0;
 
-				for ( y = 0; y < height; y += grid_size )
+				for ( y = 0; y < height; y += gridsize )
 				{
 					result[index] = { x: x, y: y, x_end:x, y_end: y, column: column, row: row, index: index };
 					index++;
