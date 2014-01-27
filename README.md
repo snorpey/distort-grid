@@ -30,3 +30,7 @@ third party code used in this experiment
 license
 ---
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/snorpey/distort-grid/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
