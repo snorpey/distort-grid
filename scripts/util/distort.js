@@ -50,14 +50,24 @@ define(
 				ctx.save();
 				ctx.setTransform( xm[0], ym[0], xm[1], ym[1], xm[2], ym[2] );
 				ctx.beginPath();
-				ctx.moveTo( 0, 0 );
-				ctx.lineTo( grid_size, 0 );
-				ctx.lineTo( 0, grid_size );
-				ctx.lineTo( 0, 0 );
+
+				// add a little bit of overlap on the
+				// triangles to avoid zebra lines
+				ctx.moveTo( -1, -1 );
+				ctx.lineTo( grid_size + 1, -1 );
+				ctx.lineTo( -1, grid_size + 1 );
+				ctx.lineTo( -1, -1 );
 				ctx.closePath();
-				ctx.fill();
 				ctx.clip();
-				ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, 0, 0, grid_size, grid_size );
+				
+				// if we need to scale, make image a little bit bigger to avoid zebra lines
+				// (comparing horizontal scale and vertical scale)
+				if ( xm[0] !== ym[1] ) {
+					ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, -1, -1, grid_size + 1, grid_size + 1 );
+				} else {
+					ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, 0, 0, grid_size, grid_size );
+				}
+
 				ctx.restore();
 
 				ctx.save();
@@ -65,12 +75,19 @@ define(
 				ctx.beginPath();
 				ctx.moveTo( grid_size, grid_size );
 				ctx.lineTo( grid_size, 0 );
+				ctx.lineTo( grid_size - 1, 0 );
+				ctx.lineTo( -1, grid_size );
 				ctx.lineTo( 0, grid_size );
 				ctx.lineTo( grid_size, grid_size );
 				ctx.closePath();
-				ctx.fill();
 				ctx.clip();
-				ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, 0, 0, grid_size, grid_size );
+
+				if ( xn[0] !== yn[1] ) {
+					ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, -1, -1, grid_size + 1, grid_size + 1 );
+				} else {
+					ctx.drawImage( image, p1.x, p1.y, grid_size, grid_size, 0, 0, grid_size, grid_size );
+				}
+
 				ctx.restore();
 			}
 		}
