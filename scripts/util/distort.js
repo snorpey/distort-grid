@@ -26,24 +26,29 @@ define(
 		{
 			len = points.length;
 
+			var distortShapeData = [ ];
+
 			for ( i = 0; i < len; i++ )
 			{
-				processPoint( ctx, image, points, points[i], grid_size );
+				processPoint( ctx, image, points, points[i], grid_size, distortShapeData );
 			}
 
-			done( ctx.getImageData( 0, 0, canvas.width, canvas.height ) );
+			done( ctx.getImageData( 0, 0, canvas.width, canvas.height ), distortShapeData );
 		}
 
-		function processPoint( ctx, image, points, p1, grid_size )
+		function processPoint( ctx, image, points, p1, grid_size, distortShapeData )
 		{
 			var p3 = getItemByValue( points, 'row', p1.row + 1, 'column', p1.column );
 			var p2 = getItemByValue( points, 'row', p1.row,     'column', p1.column + 1 );
 			var p4 = getItemByValue( points, 'row', p1.row + 1, 'column', p1.column + 1 );
 
+			// console.log( points );
+
 			if ( p1 && p2 && p3 && p4 )
 			{
 				var xm = getLinearSolution( 0, 0, p1.x_end, grid_size, 0, p2.x_end, 0, grid_size, p3.x_end );
 				var ym = getLinearSolution( 0, 0, p1.y_end, grid_size, 0, p2.y_end, 0, grid_size, p3.y_end );
+				
 				var xn = getLinearSolution( grid_size, grid_size, p4.x_end, grid_size, 0, p2.x_end, 0, grid_size, p3.x_end );
 				var yn = getLinearSolution( grid_size, grid_size, p4.y_end, grid_size, 0, p2.y_end, 0, grid_size, p3.y_end );
 
@@ -71,6 +76,34 @@ define(
 				ctx.restore();
 
 				ctx.save();
+
+				distortShapeData.push( {
+					points: [
+						{ x: p1.x, y: p1.y },
+						{ x: p2.x, y: p2.y },
+						{ x: p3.x, y: p3.y },
+						{ x: p4.x, y: p4.y }
+					],
+					transforms: {
+						shape: {
+							scaleX: xm[0],
+							skewX: ym[0],
+							scaleY: xm[1],
+							skewY: ym[1],
+							translateX: xm[2],
+							translateY: ym[2]
+						},
+						image: {
+							scaleX: xn[0],
+							skewX: yn[0],
+							scaleY: xn[1],
+							skewY: yn[1],
+							translateX: xn[2],
+							translateY: yn[2]
+						}
+					}
+				} );
+
 				ctx.setTransform( xn[0], yn[0], xn[1], yn[1], xn[2], yn[2] );
 				ctx.beginPath();
 				ctx.moveTo( grid_size, grid_size );

@@ -81,7 +81,7 @@ define(
 			}
 		}
 
-		function draw( image_data )
+		function draw( image_data, distort_data )
 		{
 			ctx.clearRect( 0, 0, canvas.width, canvas.height );
 			canvas_helper.resize( canvas, image_data );
@@ -89,6 +89,10 @@ define(
 
 			is_processing = false;
 			image_data = null;
+
+			if ( distort_data ) {
+				signals['data-updated'].dispatch( distort_data );
+			}
 		}
 
 		function exportData( callback )
