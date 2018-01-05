@@ -18,6 +18,7 @@ require(
 		'src/controls',
 		'src/export-button',
 		'src/import-button',
+		'src/data-button',
 		'src/upload-imgur',
 		'src/intro',
 		'util/feature-test',
@@ -32,6 +33,7 @@ require(
 		controls,
 		export_button,
 		import_button,
+		data_button,
 		imgur,
 		intro,
 		testFeatures,
@@ -45,14 +47,15 @@ require(
 			var shared = {
 				feature: supported_features,
 				signals: {
-					'points-updated'           : new Signal(),
-					'load-file'                : new Signal(),
-					'image-loaded'             : new Signal(),
-					'set-new-src'              : new Signal(),
-					'control-set'              : new Signal(),
-					'control-updated'          : new Signal(),
-					'close-intro'              : new Signal(),
-					'image-data-url-requested' : new Signal()
+					'points-updated'             : new Signal(),
+					'load-file'                  : new Signal(),
+					'image-loaded'               : new Signal(),
+					'set-new-src'                : new Signal(),
+					'control-set'                : new Signal(),
+					'control-updated'            : new Signal(),
+					'close-intro'                : new Signal(),
+					'image-data-url-requested'   : new Signal(),
+					'data-updated'               : new Signal()
 				}
 			};
 
@@ -63,6 +66,7 @@ require(
 			controls.init( shared );
 			export_button.init( shared );
 			import_button.init( shared );
+			data_button.init( shared );
 			image.init( shared );
 			file.init( shared );
 			imgur.init( shared );

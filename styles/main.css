@@ -329,6 +329,14 @@ a:hover {
 	z-index: 2;
 }
 
+.transform-data-btn {
+	font-size: 80%;
+	color: #999;
+	margin-left: 20px;
+	float: right;
+	margin-top: 10px;
+}
+
 @media all and (max-width: 860px) {
 	.nav-wrapper {
 		text-align: center;
