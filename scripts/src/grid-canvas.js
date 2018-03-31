@@ -1,7 +1,7 @@
 /*global define*/
 define(
-	[ 'util/canvas', 'util/collection' ],
-	function( canvas_helper, collection_helper )
+	[ 'util/canvas', 'util/collection', 'util/feature-test' ],
+	function( canvas_helper, collection_helper, featureTests )
 	{
 		var signals;
 		var element;
@@ -13,6 +13,10 @@ define(
 		var current_pos = { x: 0, y: 0 };
 		var last_pos = current_pos;
 		var gridsize = 50;
+		var is_touch_supported = false;
+		var is_touching = false;
+		var touch_id = null;
+		var grind_btn_el = null;
 
 		function init( shared )
 		{
@@ -32,11 +36,29 @@ define(
 
 		function addListeners()
 		{
-			element.addEventListener( 'mousedown', mousePressed );
-			element.addEventListener( 'mousemove', mouseMoved );
-			element.addEventListener( 'mouseup', mouseReleased );
-			element.addEventListener( 'mouseout', mouseOuted );
-			element.addEventListener( 'mouseover', mouseHovered );
+			featureTests( function ( result ) {
+				if ( result.touch ) {
+					is_touch_supported = true;
+					element.addEventListener( 'touchstart', touchStarted );
+					element.addEventListener( 'touchend', touchEnded );
+
+					grind_btn_el = document.createElement( 'button' );
+					grind_btn_el.classList.add( 'button' );
+					grind_btn_el.textContent = 'Toggle Grid';
+					grind_btn_el.addEventListener( 'click', toggleGrid );
+
+					document.querySelector( '.light-bg .content' ).appendChild( grind_btn_el );
+
+				} else {
+					element.addEventListener( 'mousedown', mousePressed );
+					element.addEventListener( 'mousemove', mouseMoved );
+					element.addEventListener( 'mouseup', mouseReleased );
+					element.addEventListener( 'mouseout', mouseOuted );
+					element.addEventListener( 'mouseover', mouseHovered );
+				}
+			} )
+
+			
 		}
 
 		function controlsUpdated( new_values )
@@ -46,6 +68,43 @@ define(
 				gridsize = parseInt( new_values.gridsize, 10 );
 				resetPoints();
 				update();
+			}
+		}
+
+		function touchStarted ( event ) {
+			if ( ! is_touching ) {
+				is_touching = true;
+				
+				if ( event.changedTouches && event.changedTouches.length && event.changedTouches[0] ) {
+					touch_id = event.changedTouches[0].identifier;
+					element.addEventListener( 'touchmove', touchMoved );
+
+					mousePressed( event.changedTouches[0] );
+				}
+			}
+		}
+
+		function touchMoved ( event ) {
+			if ( is_touching && event.changedTouches && event.changedTouches.length ) {
+				for ( var i = 0, len = event.changedTouches.length; i < len; ++i ) {					
+					if ( event.changedTouches[i] && event.changedTouches[i].identifier === touch_id ) {
+						mouseMoved( event.changedTouches[i] );
+						break;
+					}
+				}
+			}
+		}
+
+		function touchEnded ( event ) {
+			if ( is_touching && event.changedTouches && event.changedTouches.length ) {
+				for ( var i = 0, len = event.changedTouches.length; i < len; ++i ) {
+					if ( event.changedTouches[i] && event.changedTouches[i].identifier === touch_id ) {						
+						is_touching = null;
+						touch_id = null;
+						mouseReleased( event.changedTouches[i] );
+						break;
+					}
+				}
 			}
 		}
 
@@ -95,8 +154,13 @@ define(
 
 			else
 			{
-				current_pos.x = event.layerX;
-				current_pos.y = event.layerY;
+				// https://stackoverflow.com/a/33756703
+				var rect = event.target.getBoundingClientRect();
+				var x = event.pageX - rect.left;
+				var y = event.pageY - rect.top;
+
+				current_pos.x = x;
+				current_pos.y = y;
 			}
 
 			update();
@@ -169,6 +233,16 @@ define(
 					ctx.closePath();
 				}
 			}
+		}
+
+		function toggleGrid () {
+			is_over = ! is_over;
+
+			if ( grind_btn_el ) {
+				grind_btn_el.classList[is_over ? 'add' : 'remove']( 'is-active' );
+			}
+
+			update();
 		}
 
 		function resizeCanvas( image )

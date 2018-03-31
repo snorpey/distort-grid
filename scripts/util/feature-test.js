@@ -6,7 +6,8 @@ define(
 			'canvas': { required: true, test: function(){ return !! document.createElement('canvas').getContext; } },
 			'query-selector-all': { required: false, test: function(){ return !! document.querySelectorAll; } },
 			'drag-drop': { required: false, test: function(){ return 'draggable' in document.createElement('span'); } },
-			'file-api': { required: false, test: function(){ return typeof FileReader !== 'undefined'; } }
+			'file-api': { required: false, test: function(){ return typeof FileReader !== 'undefined'; } },
+			'touch': { required: false, test: function(){ return 'ontouchstart' in document.documentElement; } }
 		};
 
 		function test( success, error )

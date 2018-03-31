@@ -28,11 +28,8 @@ module.exports = function( grunt )
 				files: [
 					{ src: [ '../index.html' ], dest: '../production/index.html' }
 				]
-			}
-		},
-		imagemin: {
-			jpg: {
-				options: { progressive: true },
+			},
+			copy_img: {
 				files: [
 					{
 						expand: true,
@@ -63,12 +60,9 @@ module.exports = function( grunt )
 	grunt.loadNpmTasks( 'grunt-contrib-requirejs' );
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
-
-	grunt.registerTask( 'default', [ 'requirejs', 'cssmin', 'copy', 'imagemin' ] );
-	grunt.registerTask( 'production', [ 'requirejs', 'cssmin', 'copy', 'imagemin' ] );
+	grunt.registerTask( 'default', [ 'requirejs', 'cssmin', 'copy' ] );
+	grunt.registerTask( 'production', [ 'requirejs', 'cssmin', 'copy' ] );
 	grunt.registerTask( 'js', [ 'requirejs' ] );
 	grunt.registerTask( 'css', [ 'cssmin' ] );
 	grunt.registerTask( 'cp', [ 'copy' ] );
-	grunt.registerTask( 'img', [ 'imagemin' ] );
 };

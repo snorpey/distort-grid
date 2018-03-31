@@ -5,7 +5,6 @@
     "grunt": "~0.4.1",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-cssmin": "~0.6.1",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-imagemin": "~0.3.0"
+    "grunt-contrib-copy": "~0.4.1"
   }
 }
