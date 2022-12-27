@@ -3,7 +3,7 @@ image distortion experiment
 
 this is an experiment for the web browser. it lets you distort an image by moving intersections in a grid.
 
-[![distortion experiment screen shot](https://dl.dropboxusercontent.com/u/1098704/Screenshots/github-distort-grid.png)](http://snorpey.github.io/distort-grid/)
+[![distortion experiment screen shot](distort-grid.png)](http://snorpey.github.io/distort-grid/)
 
 [online demo](http://snorpey.github.io/distort-grid/)
 
@@ -13,11 +13,11 @@ build script
 ---
 the build script takes care of concatenating and minifying all scripts and styles. it uses [gruntjs](http://gruntjs.com/).
 
-please make sure that both [nodejs](http://nodejs.org/) and grunt-cli are [set up properly](http://gruntjs.com/getting-started) on your machine.
+please make sure that [nodejs](http://nodejs.org/) is installed on your machine.
 
-run ```npm install``` from within the ```build/``` folder to install the dependencies of the build script.
+run ```npm install``` from within the root folder of the project to install the dependencies of the build script.
 
-to build, run ```grunt production``` from within the ```build/``` folder. the optimized files will get copied to the ```production/``` folder.
+to build the project, run ```npm build```. the optimized files will get copied to the ```dist/${BUILD_DATE}``` folder.
 
 third party code used in this experiment
 ---

@@ -28,4 +28,6 @@ $RECYCLE.BIN/
 node_modules/
 
 # production folder
-production/
+dist/
+
+todo.md

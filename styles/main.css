@@ -125,6 +125,10 @@ a:hover {
 	position: relative;
 }
 
+.intro .headline {
+	color: #000;
+}
+
 .intro .close {
 	position: absolute;
 	top: 10px;
