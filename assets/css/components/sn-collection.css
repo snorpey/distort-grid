@@ -1,0 +1,50 @@
+.sn-collection {
+	--sn-collection-item-size: calc(var(--size-1) * 20);
+	display: flex;
+	gap: var(--size-2);
+	flex-direction: column;
+}
+
+.sn-collection__items {
+	display: flex;
+	gap: var(--size-2);
+	overflow: auto;
+}
+
+.sn-collection__item {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2);
+	width: var(--sn-collection-item-size);
+}
+
+.sn-collection__item-figure {
+	display: flex;
+	width: var(--sn-collection-item-size);
+	flex-direction: column;
+	gap: var(--size-2);
+}
+
+.sn-collection__item-image {
+	display: block;
+	width: 100%;
+	height: var(--sn-collection-item-size);
+	object-fit: contain;
+	background-color: var(--color--foreground--active);
+}
+
+.sn-collection__item-text {
+	font-size: 90%;
+}
+
+.sn-collection__item-buttons {
+	display: flex;
+	gap: var(--size-1);
+	width: 100%;
+	flex-direction: column;
+}
+
+.sn-collection__item-btn {
+	display: flex;
+	width: 100%;
+}

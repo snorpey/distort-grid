@@ -1,0 +1,50 @@
+.sn-control {
+	display: flex;
+	width: 100%;
+	gap: var(--size-1);
+}
+
+.sn-control__label {
+	display: flex;
+	min-width: 13ch;
+	align-items: center;
+	gap: var(--size-1);
+	user-select: none;
+}
+
+@media screen and (min-width: 840px) {
+	.sn-control__label {
+		min-width: initial;
+		white-space: nowrap;
+	}
+}
+
+@media screen and (min-width: 1600px) {
+	.sn-control__label {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.sn-control__label--checkbox {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.sn-control__label--checkbox .sn-control__input {
+	margin-right: var(--size-2);
+}
+
+.sn-control__input {
+	display: block;
+}
+
+.sn-control__input--number {
+	width: 7ch;
+}
+
+.sn-control__input--slider {
+	width: 100%;
+	flex-shrink: 2;
+}

@@ -29,3 +29,5 @@ node_modules/
 
 # production folder
 dist/
+
+todo.md
