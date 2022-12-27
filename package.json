@@ -2,15 +2,6 @@
 	"name": "distort-grid-build",
 	"version": "0.0.1",
 	"devDependencies": {
-		"@rollup/plugin-buble": "^0.21.3",
-		"cssnano": "^5.1.11",
-		"glob": "^7.2.0",
-		"mkdirp": "^1.0.4",
-		"postcss": "^8.4.14",
-		"postcss-import": "^14.1.0",
-		"rollup": "^2.58.0",
-		"ssri": "^8.0.1",
-		"uglify-js": "^3.14.2",
 		"vite": "^4.0.1"
 	},
 	"scripts": {
